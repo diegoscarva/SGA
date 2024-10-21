@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coleta Seletiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+            text-shadow: 1px 1px 2px black; /* Contorno preto */
+        }
+        .item {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 150px;
+            text-shadow: 1px 1px 2px black; /* Contorno preto */
+        }
+        .item:hover {
+            transform: scale(1.05);
+        }
+        .papel { background-color: #003DA5; } /* Azul */
+        .plastico { background-color: #FF0000; } /* Vermelho */
+        .organico { background-color: #A95A2D; } /* Marrom */
+        .metal { background-color: #FFF000; } /* Amarelo */
+        .vidro { background-color: #008000; } /* Verde */
+        .list-container {
+            display: none;
+            padding: 20px;
+            color: white;
+            font-weight: bold;
+            text-align: left;
+            text-shadow: 1px 1px 2px black; /* Contorno preto */
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        h1 {
+            color: #333;
+            text-shadow: 1px 1px 2px black; /* Contorno preto */
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 3.9s;
+            text-shadow: 1px 1px 2px black; /* Contorno preto */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .search-container {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .search-input {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search-icon {
+            margin-left: 5px;
+            cursor: pointer;
+            color: #007bff;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Procurar item" oninput="filtrarItens()">
+        <span class="search-icon">🔍</span> <!-- Lupa -->
+    </div>
+    
+    <div id="menu">
+        <h1>Escolha um Item para Descarte</h1>
+        <div class="container" id="item-container">
+            <div class="item papel" onclick="mostrarLista('papel')">Caixas de Papel</div>
+            <div class="item plastico" onclick="mostrarLista('plastico')">Garrafas PET</div>
+            <div class="item organico" onclick="mostrarLista('organico')">Restos de Frutas</div>
+            <div class="item metal" onclick="mostrarLista('metal')">Latas de Refrigerante</div>
+            <div class="item vidro" onclick="mostrarLista('vidro')">Garrafas de Vidro</div>
+            <div class="item papel" onclick="mostrarLista('papel')">Embalagens de Papel</div>
+            <div class="item plastico" onclick="mostrarLista('plastico')">Embalagens Plásticas</div>
+            <div class="item organico" onclick="mostrarLista('organico')">Restos de Comida</div>
+            <div class="item metal" onclick="mostrarLista('metal')">Latas de Comida</div>
+            <div class="item vidro" onclick="mostrarLista('vidro')">Potes de Vidro</div>
+            <div class="item papel" onclick="mostrarLista('papel')">Jornais</div>
+            <div class="item plastico" onclick="mostrarLista('plastico')">Sacolas Plásticas</div>
+            <div class="item organico" onclick="mostrarLista('organico')">Cascas de Ovos</div>
+            <div class="item metal" onclick="mostrarLista('metal')">Embalagens Metálicas</div>
+            <div class="item vidro" onclick="mostrarLista('vidro')">Frascos de Perfume</div>
+            <div class="item papel" onclick="mostrarLista('papel')">Revistas</div>
+            <div class="item plastico" onclick="mostrarLista('plastico')">Brinquedos de Plástico</div>
+            <div class="item organico" onclick="mostrarLista('organico')">Sobra de Saladas</div>
+            <div class="item metal" onclick="mostrarLista('metal')">Panelas Velhas</div>
+            <div class="item vidro" onclick="mostrarLista('vidro')">Copos de Vidro</div>
+            <div class="item papel" onclick="mostrarLista('papel')">Cadernos Usados</div>
+            <div class="item plastico" onclick="mostrarLista('plastico')">Embalagens de Iogurte</div>
+            <div class="item organico" onclick="mostrarLista('organico')">Restos de Carnes</div>
+            <div class="item metal" onclick="mostrarLista('metal')">Tampas de Latas</div>
+            <div class="item vidro" onclick="mostrarLista('vidro')">Vidros de Azeite</div>
+            <div class="item papel" onclick="mostrarLista('papel')">Cartões</div>
+            <div class="item plastico" onclick="mostrarLista('plastico')">Caixas de Leite</div>
+            <div class="item organico" onclick="mostrarLista('organico')">Restos de Pães</div>
+            <div class="item metal" onclick="mostrarLista('metal')">Embalagens de Alumínio</div>
+            <div class="item vidro" onclick="mostrarLista('vidro')">Frascos de Conservas</div>
+        </div>
+    </div>
+
+    <div id="papel" class="list-container" style="background-color: #003DA5;">
+        <h2>Coletor Azul (Papel)</h2>
+        <ul>
+            <li>Caixas de papel</li>
+            <li>Embalagens de papel</li>
+            <li>Jornais</li>
+            <li>Revistas</li>
+            <li>Cadernos usados</li>
+        </ul>
+        <button onclick="voltarMenu()">Voltar</button>
+    </div>
+
+    <div id="plastico" class="list-container" style="background-color: #FF0000;">
+        <h2>Coletor Vermelho (Plástico)</h2>
+        <ul>
+            <li>Garrafas PET</li>
+            <li>Embalagens de produtos</li>
+            <li>Sacolas plásticas</li>
+            <li>Brinquedos de plástico</li>
+            <li>Embalagens de iogurte</li>
+        </ul>
+        <button onclick="voltarMenu()">Voltar</button>
+    </div>
+
+    <div id="organico" class="list-container" style="background-color: #A95A2D;">
+        <h2>Coletor Marrom (Orgânico)</h2>
+        <ul>
+            <li>Restos de frutas e vegetais</li>
+            <li>Cascas de ovos</li>
+            <li>Restos de comida</li>
+            <li>Restos de saladas</li>
+            <li>Restos de pães</li>
+        </ul>
+        <button onclick="voltarMenu()">Voltar</button>
+    </div>
+
+    <div id="metal" class="list-container" style="background-color: #FFF000;">
+        <h2>Coletor Amarelo (Metal)</h2>
+        <ul>
+            <li>Latas de refrigerante</li>
+            <li>Latas de comida</li>
+            <li>Embalagens metálicas</li>
+            <li>Tampas de latas</li>
+            <li>Panelas velhas</li>
+        </ul>
+        <button onclick="voltarMenu()">Voltar</button>
+    </div>
+
+    <div id="vidro" class="list-container" style="background-color: #008000;">
+        <h2>Coletor Verde (Vidro)</h2>
+        <ul>
+            <li>Garrafas de vidro</li>
+            <li>Potes de vidro</li>
+            <li>Frascos de perfume</li>
+            <li>Copos de vidro</li>
+            <li>Vidros de azeite</li>
+            <li>Frascos de conservas</li>
+        </ul>
+        <button onclick="voltarMenu()">Voltar</button>
+    </div>
+
+    <script>
+        function mostrarLista(tipo) {
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById(tipo).style.display = 'block';
+        }
+
+        function voltarMenu() {
+            const lists = document.querySelectorAll('.list-container');
+            lists.forEach(list => {
+                list.style.display = 'none';
+            });
+            document.getElementById('menu').style.display = 'block';
+        }
+
+        function filtrarItens() {
+            const input = document.querySelector('.search-input').value.toLowerCase();
+            const items = document.querySelectorAll('.item');
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(input) ? 'inline-block' : 'none';
+            });
+        }
+
+        // Embaralhar itens do menu
+        window.onload = function() {
+            const container = document.getElementById('item-container');
+            const items = Array.from(container.children);
+            items.sort(() => Math.random() - 0.5);
+            items.forEach(item => container.appendChild(item));
+        };
+    </script>
+</body>
+</html>
